@@ -1,20 +1,39 @@
 #display {
     background-color: rgb(235, 235, 235);
+    font-size: 3.5em;
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: arial;
+    height: 1.1em;
+    width: 1em;
+    width: 334px;
+    margin-bottom: 20px;
 }
 
 #container {
-    max-width: 400px;
+    max-width: 350px;
     text-align: center;
     margin: auto;
     margin-top: 100px;
 }
 
-#buttons {
-    font-size: 2em;
+.button {
+    font-size: 3em;
+    width: 3em;
+    height: 1.5em;
+    border-radius: 5px;
+    border: solid rgb(112, 112, 112);
 }
 
-#row {
-    
+.zerobutton {
+    width: 6.25em;
+    font-size: 3em;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
 }
 
 .button {

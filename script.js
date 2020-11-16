@@ -17,3 +17,14 @@ function divide(num1, num2) {
 function operate(operator, num1, num2) {
     return operator(num1, num2);
 }
+
+const display = document.getElementById("display");
+
+function updateDisplay(text) {
+    display.textContent += text;
+}
+
+function clear() {
+    display.textContent = "";
+}
+
