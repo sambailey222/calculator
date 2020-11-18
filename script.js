@@ -1,11 +1,13 @@
-// the first value entered into the display
+// the input written on display line 2
+let input = 0;
+// the first value entered into the display (to be operated on)
 let inputValue1 = 0;
-// the second value entered into the display
+// the second value entered into the display (to be operated on)
 let inputValue2 = 0;
 // the mathematic function (e.g. +-*/)
 let operator = 0;
 // keep track of whether display needs to be cleared
-let operatorPressedLast = "no";
+let operatorPressedLast = false;
 
 function add(num1, num2) {
     return num1 + num2;
@@ -31,14 +33,16 @@ function operate(operator, num1, num2) {
 const line2 = document.getElementById("line2");
 
 function updateDisplay(text) {
-    if (inputValue1.toString().length < 10) {
+    if (input.toString().length < 10) {
     line2.textContent += text;
-    inputValue1 = parseFloat(line2.textContent);
-    console.log(typeof inputValue1)
+    input = parseFloat(line2.textContent);
+    operatorPressedLast = false;
+    console.log(operatorPressedLast);
     }
 }
 
 function clear() {
+    line1.textContent = "";
     line2.textContent = "";
     inputValue1 = 0;
     inputValue2 = 0;
@@ -54,13 +58,48 @@ clearButton.addEventListener("click", clear);
 // -- INPUT NUMBER BUTTONS -- //
 
 // select all number buttons
-const numberButton = document.querySelectorAll(".num");
-numberButton.forEach(btn => btn.addEventListener("click", () => updateDisplay(btn.textContent)));
-console.log(numberButton);
 // foreach number button add an event listener
 // when click is triggered
 // update text content of display with text content of said button
+const numberButton = document.querySelectorAll(".num");
+numberButton.forEach(btn => btn.addEventListener("click", () => updateDisplay(btn.textContent)));
+console.log(numberButton);
 
+// -- OPERATOR BUTTONS -- //
+
+// when one of the operator buttons is pressed, 
+    // global value of inputValue1 == current value, 
+    // global value of operator == pressed operator
+    // global value of inputValue2 == doesn't need to be tracked yet. equals will track it.
+    // set operatorPressedLast to "yes";
+    // line1 is updated to display inputValue1 and operator
+
+function operatorUpdate(symbol) {
+    switch (symbol) {
+        case "/": 
+            operator = divide;
+            break;
+        case "x":
+            operator = multiply;
+            break;
+        case "-":
+            operator = subtract;
+            break;
+        case "+":
+            operator = add;
+            break;
+    }
+    console.log(operator);
+    inputValue1 = input;
+    operatorPressedLast = true;
+    line2.textContent = "";
+    input = "";
+    line1.textContent += `${inputValue1} ${symbol} `;
+} 
+
+// add event listener to all operator buttons
+const operatorButton = document.querySelectorAll(".operator");
+operatorButton.forEach(btn => btn.addEventListener("click", () => operatorUpdate(btn.textContent)));
 
 
 // pressing equals is what needs to trigger the operate function, not pressing the corresponding button (+-/*).
@@ -76,12 +115,7 @@ console.log(numberButton);
         // if operatorPressedLast = no
             // do not clear line2 and update as normal
         // after either, set operatorPressedLast to "no"
-// when one of the operator buttons is pressed, 
-    // global value of inputValue1 == current value, 
-    // global value of operator == pressed operator
-    // global value of inputValue2 == doesn't need to be tracked yet. equals will track it.
-    // set operatorPressedLast to "yes";
-    // line1 is updated to display inputValue1 and operator
+
 // when equals is pressed, 
     // global value of inputValue2 == current value
     // perform operate function with global values
@@ -93,6 +127,17 @@ console.log(numberButton);
 // when clear is pressed,
     // last character on line2 should be removed
 
+// can use operator pressed last to track if user tries to do division and multiplication one after other. if so, reset to 0. 
+// think about edge case of + -. they should be able to do this without resetting!
 
-const divideButton = document.getElementById("divide");
-divideButton.addEventListener("click", updateDisplay);
+
+
+
+    // function divideUpdate() { 
+    //     operator = divide;
+    //     inputValue1 = input;
+    //     operatorPressedLast = true;
+    //     line2.textContent = "";
+    //     input = 0;
+    //     line1.textContent += `${inputValue1} ${divideButton.textContent} `;
+    // } 
