@@ -1,14 +1,25 @@
 #display {
     background-color: rgb(235, 235, 235);
     font-size: 3.5em;
+    text-align: right;
     border: 3px solid black;
     border-radius: 5px;
     padding: 5px;
     font-family: arial;
-    height: 1.1em;
-    width: 1em;
-    width: 334px;
+    height: 2.2em;
+    width: 6em;
+    /* width: 334px; */
     margin-bottom: 20px;
+}
+
+#line1 {
+    height: 64px;
+    color: blue;
+    
+}
+
+#line2 {
+    height: 64px;
 }
 
 #container {
@@ -16,6 +27,10 @@
     text-align: center;
     margin: auto;
     margin-top: 100px;
+}
+
+#buttons {
+    width: 22em;
 }
 
 .button {
@@ -36,6 +51,3 @@
     justify-content: space-between;
 }
 
-.button {
-    margin: auto;
-}
