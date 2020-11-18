@@ -31,19 +31,37 @@ function operate(operator, num1, num2) {
 const line2 = document.getElementById("line2");
 
 function updateDisplay(text) {
+    if (inputValue1.toString().length < 10) {
     line2.textContent += text;
+    inputValue1 = parseFloat(line2.textContent);
+    console.log(typeof inputValue1)
+    }
 }
 
 function clear() {
     line2.textContent = "";
+    inputValue1 = 0;
+    inputValue2 = 0;
 }
 
 const clearButton = document.getElementById("clear");
 clearButton.addEventListener("click", clear);
 
+// INSERT BACKSPACE SCRIPT
+
 // INSERT POSNEG SCRIPT
 
-// INSERT PERCENTAGE SCRIPT
+// -- INPUT NUMBER BUTTONS -- //
+
+// select all number buttons
+const numberButton = document.querySelectorAll(".num");
+numberButton.forEach(btn => btn.addEventListener("click", () => updateDisplay(btn.textContent)));
+console.log(numberButton);
+// foreach number button add an event listener
+// when click is triggered
+// update text content of display with text content of said button
+
+
 
 // pressing equals is what needs to trigger the operate function, not pressing the corresponding button (+-/*).
 // need to keep track of num1, num2, and operator
