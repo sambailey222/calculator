@@ -1,13 +1,13 @@
 // the input written on display line 2
 let input = 0;
 // the first value entered into the display (to be operated on)
-let inputValue1 = "";
+let inputValue1 = 0;
 // the second value entered into the display (to be operated on)
-let inputValue2 = "";
+let inputValue2 = 0;
 // the mathematic function (e.g. +-*/)
 let operator = 0;
 // keep track of operator symbol for line1 display
-let operatorSymbol = "";
+let operatorSymbol = 0;
 // keep track of whether display needs to be cleared
 let operatorPressedLast = false;
 // keep track of whether equals was pressed last
@@ -61,13 +61,14 @@ function updateDisplay(text) {
 
 function clear() {
     line1.textContent = "";
-    line2.textContent = "";
-    inputValue1 = "";
-    inputValue2 = "";
-    output = "";
+    line2.textContent = 0;
+    inputValue1 = 0;
+    inputValue2 = 0;
+    output = 0;
     operator = 0;
     clearPressedLast = true;
     eqaulsPressedLast = false;
+    operatorPressedLast = false;
 }
 
 const clearButton = document.getElementById("clear");
@@ -88,53 +89,18 @@ numberButton.forEach(btn => btn.addEventListener("click", () => updateDisplay(bt
 console.log(numberButton);
 
 // -- OPERATOR BUTTONS -- //
-
-// when one of the operator buttons is pressed, 
-    // global value of inputValue1 == current value, 
-    // global value of operator == pressed operator
-    // global value of inputValue2 == doesn't need to be tracked yet. equals will track it.
-    // set operatorPressedLast to true;
-    // line1 is updated to display inputValue1 and operator
-
-
-// 3 CASES FOR OPERATOR UPDATE
-    // 1. NEITHER OPERATOR NOR EQUALS WERE PRESSED LAST (NUMBER/CLEAR PRESSED LAST)
-        // global value of inputValue1 == current value, 
-        // global value of operator == pressed operator
-        // operatorSymbol = relevant symbol
-        // global value of inputValue2 == doesn't need to be tracked yet. equals will track it.
-        // set operatorPressedLast to true;
-        // equalsPressedLast changed to false;
-        // line1 is updated to display inputValue1 and operator
-    // 2. EQUALS WAS PRESSED LAST
-        // when operator is pressed after equals has been pressed
-        // operator and operatorSymbol are changed
-        // output becomes inputValue1
-        // inputValue1 and symbol are printed to line1
-        // line2 is cleared waiting for number input
-        // equalsPressedLast changed to false
-        // operatorPressedLast changed to true
-    // 3. AN OPERATOR WAS PRESSED LAST
-        // line1 is cleared
-        // line2 is reset to 0
-        // input reset to 0
-        // inputValue1 reset to 0
-        // operator == ""
-        // operatorSymbol == ""
-        // equalsPressedLast changed to false
-        // operatorPressedLast changed to true
     
 // when an operator is pressed multiple times, top line should evaluate the expression before continuing and not create text chain of operations
 // inputValue1 should be being updated each time, along with inputValue 2
-// when I press an operator, input should go into inputValue1. 
-// next time I press an operator, 
-//      if inputValue1 is not empty, 
-//          input == parseFloat(line2.textContent)
-//          inputValue2 = input
-//          line1.textContent = operate()
-//          line2.textContent = "";
 
 function operatorUpdate(symbol) {
+
+    // this ensures that "operator chaining" works i.e. user can continue to evaluate expressions using operator buttons and not equals button
+    // without this, they would always trigger the second operator they pressed (not the first already stored)
+    //THIS IS CAUSING A PROBLEM WITH THE EQAULS FUNCTION. TRY 3 + 3 = 6, -
+    if (operatorSymbol !== symbol) {
+        equals();
+    }
 
     switch (symbol) {
         case "/": 
@@ -167,21 +133,30 @@ function operatorUpdate(symbol) {
 // inputValue1 should be being updated each time, along with inputValue 2
 // when I press an operator, input should go into inputValue1. 
 // next time I press an operator, 
-//      if inputValue1 is not empty, 
+//      if inputValue1 is not 0, 
 //          input == parseFloat(line2.textContent)
 //          inputValue2 = input
 //          line1.textContent = operate()
 //          line2.textContent = "";
 
+// when I press number -> operator -> number -> different operator
+// the first operation should be done to the two numbers before the second operation
+// currently the second operation is being triggered only
+// the first operation should be triggered by the click of the second operator
+// so if operator is not 0 (i.e. has a stored value)
+// that operation should be executed and the result stored in inputValue1 and on line1
+
     if (operatorPressedLast == false && equalsPressedLast == false) 
     {
-        if (inputValue1 == "")
+
+        if (inputValue1 == 0)
         {
             inputValue1 = parseFloat(input);
             line1.textContent += `${inputValue1} ${symbol} `;
             line2.textContent = "";
         }
-        else {
+        else 
+        {
             input == parseFloat(line2.textContent);
             inputValue2 = input;
             console.log(inputValue1);
@@ -194,7 +169,7 @@ function operatorUpdate(symbol) {
         }
         
         line2.textContent = "";
-        input = "";
+        input = 0;
     }
     // 2. EQUALS WAS PRESSED LAST
         // when operator is pressed after equals has been pressed
@@ -223,9 +198,9 @@ function operatorUpdate(symbol) {
         line1.textContent = "";
         line2.textContent = 0;
         input = 0;
-        inputValue1 = "";
+        inputValue1 = 0;
         operator = 0;
-        operatorSymbol = "";
+        operatorSymbol = 0;
     }
     operatorPressedLast = true;
     equalsPressedLast = false;
@@ -254,7 +229,7 @@ function equals() {
         inputValue1 = parseFloat(line2.textContent);
         line1.textContent = inputValue1;
     }
-    else if (inputValue1 !== "") {
+    else {
     input = parseFloat(line2.textContent);
     inputValue2 = input;
     output = operate(operator, inputValue1, inputValue2);
@@ -263,12 +238,15 @@ function equals() {
     console.log(output);
     line1.textContent = `${inputValue1} ${operatorSymbol} ${inputValue2}`;
     line2.textContent = output;
-    } else {
-        inputValue1 = 0;
-        inputValue2 = 0;
-        output = 0;
-        line2.textContent = output;
-    }
+    inputValue1 = output;
+    } 
+    
+    // else {
+    //     inputValue1 = 0;
+    //     inputValue2 = 0;
+    //     output = 0;
+    //     line2.textContent = output;
+    // }
     // = operate(operator, inputValue1, inputValue2);
     equalsPressedLast = true;
         
@@ -303,14 +281,3 @@ equalsButton.addEventListener("click", () => equals());
 // can use operator pressed last to track if user tries to do division and multiplication one after other. if so, reset to 0. 
 // think about edge case of + -. they should be able to do this without resetting!
 
-
-
-
-    // function divideUpdate() { 
-    //     operator = divide;
-    //     inputValue1 = input;
-    //     operatorPressedLast = true;
-    //     line2.textContent = "";
-    //     input = 0;
-    //     line1.textContent += `${inputValue1} ${divideButton.textContent} `;
-    // } 
