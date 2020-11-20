@@ -117,6 +117,7 @@ console.log(numberButton);
 
 function operatorUpdate(symbol) {
 
+
     // this ensures that "operator chaining" works i.e. user can continue to evaluate expressions using operator buttons and not equals button
     // without this, they would always trigger the second operator they pressed (not the first already stored)
     //THIS IS CAUSING A PROBLEM WITH THE EQAULS FUNCTION. TRY 3 + 3 = 6, -
@@ -178,7 +179,7 @@ function operatorUpdate(symbol) {
         {
             inputValue1 = parseFloat(input);
             line1.textContent += `${inputValue1} ${symbol} `;
-            line2.textContent = "";
+            line2.textContent = 0;
         }
         else 
         {
@@ -193,7 +194,7 @@ function operatorUpdate(symbol) {
             inputValue1 = output;
         }
         
-        line2.textContent = "";
+        line2.textContent = 0;
         input = 0;
     }
     // 2. EQUALS WAS PRESSED LAST
@@ -214,7 +215,7 @@ function operatorUpdate(symbol) {
     else if (equalsPressedLast == true)
     {
         line1.textContent = `${inputValue1} ${symbol} `;
-        line2.textContent = "";
+        line2.textContent = 0;
     }
     // 3. AN OPERATOR WAS PRESSED LAST
         // line1 is cleared
