@@ -63,6 +63,11 @@ function symbolUpdate(symbol) {
 const line1 = document.getElementById("line1");
 const line2 = document.getElementById("line2");
 
+// if text is a decimal point
+// cehck to see if number is an integer
+// if number is an integer, proceed as normal
+// if not an integer, do nothing
+// TRY ADDING TWO NUMBERS TOGETHER THEN CONTINUE TYPING
 function updateDisplay(text) {
     if (input.toString().length < 10) {
         if (line2.textContent[0] == 0) {
@@ -71,13 +76,22 @@ function updateDisplay(text) {
         if (equalsPressedLast == true) {
             inputValue1 = output;
             line1.textContent = "";
+            operator = 0;
+            operatorSymbol = 0;
             
         }
-    console.log(typeof line2.textContent);
-    line2.textContent += text;
-    input = parseFloat(line2.textContent);
-    operatorPressedLast = false;
-    equalsPressedLast = false;
+        if (text == ".") {
+            if (Number.isInteger(parseFloat(line2.textContent))) 
+            {
+                line2.textContent += text;
+                input = parseFloat(line2.textContent);
+            }
+        } else {
+        line2.textContent += text;
+        input = parseFloat(line2.textContent);
+        }
+        operatorPressedLast = false;
+        equalsPressedLast = false;
     }
 }
 
@@ -289,6 +303,8 @@ function equals(symbol) {
             console.log(operator);
             console.log(output);
             line1.textContent = `${inputValue1} ${operatorSymbol} ${inputValue2}`;
+            output = parseFloat(output.toFixed(4));
+            
             line2.textContent = parseFloat(output.toFixed(4));
             inputValue1 = output;
             input = 0;

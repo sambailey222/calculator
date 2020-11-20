@@ -1,6 +1,7 @@
 #display {
     background-color: rgb(235, 235, 235);
     font-size: 3.5em;
+    // 3.5em;
     text-align: right;
     border: 3px solid black;
     border-radius: 5px;
