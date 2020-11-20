@@ -38,6 +38,8 @@ function operate(operator, num1, num2) {
     return operator(num1, num2);
 }
 
+
+
 function symbolUpdate(symbol) {
     switch (symbol) {
         case "/": 
@@ -122,7 +124,13 @@ clearButton.addEventListener("click", clear);
 // INSERT BACKSPACE SCRIPT
 
 // INSERT POSNEG SCRIPT
+function posNeg(num) {
+    input = num * -1;
+    line2.textContent = input;
+}
 
+const posNegButton = document.getElementById("posNeg");
+posNegButton.addEventListener("click", () => posNeg(input))
 // -- INPUT NUMBER BUTTONS -- //
 
 // select all number buttons
