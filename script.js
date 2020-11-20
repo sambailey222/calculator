@@ -17,6 +17,7 @@ let output = 0;
 // keep track of when clear is pressed
 
 
+
 function add(num1, num2) {
     return num1 + num2;
 }
@@ -62,7 +63,8 @@ function symbolUpdate(symbol) {
 // the display
 const line1 = document.getElementById("line1");
 const line2 = document.getElementById("line2");
-
+// below required to make decimal button work correctly with initial 0
+line2.textContent = 0;
 // if text is a decimal point
 // cehck to see if number is an integer
 // if number is an integer, proceed as normal
@@ -70,7 +72,7 @@ const line2 = document.getElementById("line2");
 // TRY ADDING TWO NUMBERS TOGETHER THEN CONTINUE TYPING
 function updateDisplay(text) {
     if (input.toString().length < 10) {
-        if (line2.textContent[0] == 0) {
+        if (line2.textContent === "0") {
             line2.textContent = "";
         }
         if (equalsPressedLast == true) {
@@ -78,13 +80,16 @@ function updateDisplay(text) {
             line1.textContent = "";
             operator = 0;
             operatorSymbol = 0;
-            
         }
         if (text == ".") {
             if (Number.isInteger(parseFloat(line2.textContent))) 
             {
                 line2.textContent += text;
                 input = parseFloat(line2.textContent);
+            }
+            if (line2.textContent == "") 
+            {
+                line2.textContent = "0.";
             }
         } else {
         line2.textContent += text;
@@ -103,10 +108,13 @@ function clear() {
     inputValue2 = 0;
     output = 0;
     operator = 0;
+    operatorSymbol = 0;
     clearPressedLast = true;
     eqaulsPressedLast = false;
     operatorPressedLast = false;
 }
+
+// clear();
 
 const clearButton = document.getElementById("clear");
 clearButton.addEventListener("click", clear);
@@ -295,20 +303,25 @@ function equals(symbol) {
             {
             line2.textContent = "not today";
             } 
-            else 
-            {
-            output = operate(operator, inputValue1, inputValue2);
-            console.log(inputValue1);
-            console.log(inputValue2);
-            console.log(operator);
-            console.log(output);
-            line1.textContent = `${inputValue1} ${operatorSymbol} ${inputValue2}`;
-            output = parseFloat(output.toFixed(4));
-            
-            line2.textContent = parseFloat(output.toFixed(4));
-            inputValue1 = output;
-            input = 0;
-            } 
+        else 
+        {
+        output = operate(operator, inputValue1, inputValue2);
+        console.log(inputValue1);
+        console.log(inputValue2);
+        console.log(operator);
+        console.log(output);
+        line1.textContent = `${inputValue1} ${operatorSymbol} ${inputValue2}`;
+        // round answer to 4dp
+        output = parseFloat(output.toFixed(4));
+        // stop ridiculously large numbers from overflowing display by converting to expontential
+        if (output.toString().length > 11) 
+        {
+            output = output.toExponential(0);
+        }
+        line2.textContent = output;
+        inputValue1 = output;
+        input = 0;
+        } 
     }
     
     // else {
