@@ -122,6 +122,20 @@ const clearButton = document.getElementById("clear");
 clearButton.addEventListener("click", clear);
 
 // INSERT BACKSPACE SCRIPT
+function backSpace(num) {
+    // take line2 and convert to string
+    num = num.toString();
+    num = num.substring(0, num.length - 1);
+    input = num;
+    if (input == "") 
+    {
+        input = 0;
+    }
+    line2.textContent = input;
+}
+
+const backSpaceButton = document.getElementById("backspace");
+backSpaceButton.addEventListener("click", () => backSpace(input));
 
 // INSERT POSNEG SCRIPT
 function posNeg(num) {
