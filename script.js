@@ -84,6 +84,7 @@ function updateDisplay(text) {
 function clear() {
     line1.textContent = "";
     line2.textContent = 0;
+    input = 0;
     inputValue1 = 0;
     inputValue2 = 0;
     output = 0;
@@ -237,6 +238,7 @@ function operatorUpdate(symbol) {
     }
     operatorPressedLast = true;
     equalsPressedLast = false;
+    input = 0;
 } 
 
 // add event listener to all operator buttons
@@ -258,30 +260,40 @@ operatorButton.forEach(btn => btn.addEventListener("click", () => operatorUpdate
     // if user presses a number after pressing equals, line1 and inputValue1 should change to output value 
     // if a user types a number and presses equals, line1 should display that number and it should be stored in input1
 function equals(symbol) {
-    if (operator == 0) {
+    if (operator == 0) 
+    {
         inputValue1 = parseFloat(line2.textContent);
         line1.textContent = inputValue1;
     }
-    
-    else if (equalsPressedLast == true) {
+    else if (equalsPressedLast == true) 
+    {
             // inputvalue1 = output (already accomplished below)
-            line1.textContent = inputValue1;
-            operatorSymbol = symbolUpdate(symbol)
-            inputValue2 = 0;
-            line2.textContent = 0;
+        line1.textContent = inputValue1;
+        operatorSymbol = symbolUpdate(symbol)
+        inputValue2 = 0;
+        line2.textContent = 0;
     }
-    else {
-    input = parseFloat(line2.textContent);
-    inputValue2 = input;
-    output = operate(operator, inputValue1, inputValue2);
-    console.log(inputValue1);
-    console.log(inputValue2);
-    console.log(operator);
-    console.log(output);
-    line1.textContent = `${inputValue1} ${operatorSymbol} ${inputValue2}`;
-    line2.textContent = output;
-    inputValue1 = output;
-    } 
+    else 
+    {
+        input = parseFloat(line2.textContent);
+        inputValue2 = input;
+        if (operator == divide && inputValue2 == 0) 
+            {
+            line2.textContent = "not today";
+            } 
+            else 
+            {
+            output = operate(operator, inputValue1, inputValue2);
+            console.log(inputValue1);
+            console.log(inputValue2);
+            console.log(operator);
+            console.log(output);
+            line1.textContent = `${inputValue1} ${operatorSymbol} ${inputValue2}`;
+            line2.textContent = parseFloat(output.toFixed(4));
+            inputValue1 = output;
+            input = 0;
+            } 
+    }
     
     // else {
     //     inputValue1 = 0;
