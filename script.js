@@ -37,6 +37,28 @@ function operate(operator, num1, num2) {
     return operator(num1, num2);
 }
 
+function symbolUpdate(symbol) {
+    switch (symbol) {
+        case "/": 
+            operator = divide;
+            operatorSymbol = "/";
+            break;
+        case "*":
+            operator = multiply;
+            operatorSymbol = "*";
+            break;
+        case "-":
+            operator = subtract;
+            operatorSymbol = "-"
+            break;
+        case "+":
+            operator = add;
+            operatorSymbol = "+";
+            break;
+    }
+    return;
+}
+
 // the display
 const line1 = document.getElementById("line1");
 const line2 = document.getElementById("line2");
@@ -98,28 +120,31 @@ function operatorUpdate(symbol) {
     // this ensures that "operator chaining" works i.e. user can continue to evaluate expressions using operator buttons and not equals button
     // without this, they would always trigger the second operator they pressed (not the first already stored)
     //THIS IS CAUSING A PROBLEM WITH THE EQAULS FUNCTION. TRY 3 + 3 = 6, -
-    if (operatorSymbol !== symbol) {
-        equals();
-    }
+    // THE ACTUAL PROBLEM IS THAT THE OUTPUT VALUE 
 
-    switch (symbol) {
-        case "/": 
-            operator = divide;
-            operatorSymbol = "/";
-            break;
-        case "*":
-            operator = multiply;
-            operatorSymbol = "*";
-            break;
-        case "-":
-            operator = subtract;
-            operatorSymbol = "-"
-            break;
-        case "+":
-            operator = add;
-            operatorSymbol = "+";
-            break;
-    }
+    // problem is this:
+    // currently when trying to chain operators, the second operator pressed is used to evaluate the expression, not the previous one.
+    // case in which this is triggered:
+        // operatorPressedLast = false;
+        // equalsPressedLast = false;
+        // basically equals needs to fire using the old operator, and retain the new one for next time
+
+
+    // if (operatorSymbol !== symbol) {
+        equals(symbol);
+    // }
+
+    // problem is this:
+    // when pressing operator after pressing equals
+    // inputValue1 is changed to 6
+    // inputValue2 is changed to 6
+    // old operator is being used (+)
+    // output is changed to 12
+    // minus is being added after the output
+
+    
+    symbolUpdate(symbol)
+    
      // 1. NEITHER OPERATOR NOR EQUALS WERE PRESSED LAST (NUMBER/CLEAR PRESSED LAST)
         // global value of inputValue1 == current value, 
         // global value of operator == pressed operator
@@ -179,6 +204,13 @@ function operatorUpdate(symbol) {
         // line2 is cleared waiting for number input
         // equalsPressedLast changed to false
         // operatorPressedLast changed to true
+
+        // what needs to happen?
+    // when pressing operator after pressing equals
+    // output is made into inputvalue1 (happens in equals function)
+    // new operator is stored (but not fired) (happens above in switch statement)
+    // inputValue2 is not declared until either equals or another operator are pressed (at which point equals is run)
+    // at this point, things updated as normal
     else if (equalsPressedLast == true)
     {
         line1.textContent = `${inputValue1} ${symbol} `;
@@ -224,10 +256,18 @@ operatorButton.forEach(btn => btn.addEventListener("click", () => operatorUpdate
     // if user presses equals either immediately, or after pressing clear, the display should show 0
     // if user presses a number after pressing equals, line1 and inputValue1 should change to output value 
     // if a user types a number and presses equals, line1 should display that number and it should be stored in input1
-function equals() {
+function equals(symbol) {
     if (operator == 0) {
         inputValue1 = parseFloat(line2.textContent);
         line1.textContent = inputValue1;
+    }
+    
+    else if (equalsPressedLast == true) {
+            // inputvalue1 = output (already accomplished below)
+            line1.textContent = inputValue1;
+            operatorSymbol = symbolUpdate(symbol)
+            inputValue2 = 0;
+            line2.textContent = 0;
     }
     else {
     input = parseFloat(line2.textContent);
@@ -235,6 +275,7 @@ function equals() {
     output = operate(operator, inputValue1, inputValue2);
     console.log(inputValue1);
     console.log(inputValue2);
+    console.log(operator);
     console.log(output);
     line1.textContent = `${inputValue1} ${operatorSymbol} ${inputValue2}`;
     line2.textContent = output;
