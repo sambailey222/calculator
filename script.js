@@ -73,6 +73,9 @@ line2.textContent = 0;
 // if not an integer, do nothing
 // TRY ADDING TWO NUMBERS TOGETHER THEN CONTINUE TYPING
 function updateDisplay(text) {
+    if (input == Infinity) {
+        clear();
+    }
     if (input.toString().length < 10) {
         if (line2.textContent === "0") {
             line2.textContent = "";

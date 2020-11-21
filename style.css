@@ -1,3 +1,32 @@
+@font-face {
+    font-family: ds_digital;
+    src: url(ds_digital/DS-DIGI.TTF);
+}
+
+@font-face {
+    font-family: scientific;
+    src: url(ScientificCalculatorLcdRegular-Kn7X.ttf);
+}
+
+#logo {
+    color: white;
+    font-family: "Goldman", cursive;
+    /* width: 100%; */
+    /* text-align: left; */
+    /* margin-left: 20px;
+    margin-right: 60px; */
+    margin-right: 120px;
+    display: inline-flex;
+}
+
+#model {
+    font-family: 'Times New Roman', Times, serif;
+    color:white;
+    /* text-align: right; */
+    /* margin-right: 20px;
+    margin-left: 55px; */
+    display: inline-flex;
+}
 #display {
     background-color: rgb(235, 235, 235);
     font-size: 3.5em;
@@ -7,44 +36,53 @@
     border-radius: 5px;
     padding: 5px;
     font-family: arial;
-    height: 2.2em;
-    width: 6em;
+    height: 1.7em;
+    width: 5.2em;
     /* width: 334px; */
     margin-bottom: 20px;
+    margin-top: 50px;
+    margin: auto;
 }
 
 #line1 {
-    height: 64px;
-    color: blue;
-    font-size: 0.5em;
+    height: 50px;
+    color: black;
+    font-size: 0.4em;
+    font-family: scientific;
 }
 
 #line2 {
-    height: 64px;
+    height: 50px;
+    font-size: 1em;
+    font-family: ds_digital;
 }
 
 #container {
     max-width: 350px;
     text-align: center;
     margin: auto;
-    margin-top: 100px;
+    /* margin-top: 100px; */
+    background-color: grey;
+    padding-top: 50px;
 }
 
 #buttons {
-    width: 22em;
+    width: 19.1em;
+    margin: auto;
 }
 
 .button {
-    font-size: 3em;
+    font-size: 2em;
     width: 3em;
     height: 1.5em;
     border-radius: 5px;
     border: solid rgb(112, 112, 112);
+    
 }
 
 .zerobutton {
     width: 6.25em;
-    font-size: 3em;
+    font-size: 2em;
 }
 
 .row {
