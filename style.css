@@ -27,12 +27,32 @@
     margin-left: 55px; */
     display: inline-flex;
 }
+
+#SVPAM {
+    color: #df5267;
+    font-family: "Goldman", cursive;
+    margin-bottom: 20px;
+    margin-top: -10px;
+    display: block;
+    font-size: 19px;
+}
+
+#displayborder {
+    
+    box-shadow: 0px 0px 25px rgb(59, 58, 58);
+    
+    margin: 0 1.5em;
+    border-radius: 6px; */
+}
+
+
 #display {
     background-color: rgb(235, 235, 235);
     font-size: 3.5em;
     // 3.5em;
     text-align: right;
-    border: 3px solid black;
+    /* border: 5px outset #3A4F6A; */
+    box-shadow: 1px 1px 10px black inset;
     border-radius: 5px;
     padding: 5px;
     font-family: arial;
@@ -58,17 +78,21 @@
 }
 
 #container {
-    max-width: 350px;
+    /* max-width: 350px; */
+    width: 350px;
     text-align: center;
     margin: auto;
     /* margin-top: 100px; */
-    background-color: grey;
-    padding-top: 50px;
+    background-color: #3A4F6A;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgb(32, 31, 31) inset;
 }
 
 #buttons {
     width: 19.1em;
     margin: auto;
+    margin-top: 25px;
+    padding-bottom: 30px;
 }
 
 .button {
@@ -76,13 +100,16 @@
     width: 3em;
     height: 1.5em;
     border-radius: 5px;
-    border: solid rgb(112, 112, 112);
-    
+    /* border: solid rgb(112, 112, 112); */
+    background-color: #B0ABAF;
+    color: white;
+    box-shadow: 0px 0px 7px rgb(59, 58, 58) inset;
 }
 
 .zerobutton {
-    width: 6.25em;
+    width: 6.75em;
     font-size: 2em;
+    margin: 5px 0px 5px 0px
 }
 
 .row {
@@ -90,3 +117,22 @@
     justify-content: space-between;
 }
 
+.red {
+    background-color: #da3a52;
+}
+
+.left-button {
+    margin: 5px 5px 5px 0;
+}
+
+.centre-button {
+    margin: 5px 5px;
+}
+
+.right-button {
+    margin: 5px 0 5px 5px;
+}
+
+.decimal-button {
+    margin: 5px 5px 5px 10px;
+}
