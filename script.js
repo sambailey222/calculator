@@ -237,6 +237,10 @@ function equals(symbol) {
 const equalsButton = document.getElementById("equals");
 equalsButton.addEventListener("click", () => equals());
 
+let firstKeyDown = false;
+const keyboardMessage = document.getElementById("keyboardMessage");
+const keyboardGuide = document.getElementById("keyboardGuide");
+
 window.addEventListener("keydown", function(e) {
     console.log(e);
 // numbers
@@ -300,8 +304,23 @@ if (e.code == "Backspace" || e.code == "Delete") {
     backSpace(input);
 }
 // backtick button for posNeg
-if (e.code == "Backquote") {
+if (e.code == "ArrowUp") {
     posNeg(input);
 }
+if (firstKeyDown == false) {
+    keyboardMessage.style.display = "none";
+    keyboardGuide.style.display = "block";
+    firstKeyDown = true;
+}
+
 });
+
+
+
+// window.addEventListener("keypress", () => {
+// if (firstKeyDown = false) {
+//     keyboardMessage.style.display = "none";
+//     keyboardGuide.style.display = "block";
+// } 
+// })
 

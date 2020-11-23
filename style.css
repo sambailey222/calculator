@@ -119,6 +119,7 @@
 
 .red {
     background-color: #da3a52;
+    color:white;
 }
 
 .left-button {
@@ -135,4 +136,29 @@
 
 .decimal-button {
     margin: 5px 5px 5px 10px;
+}
+
+#keyboardMessage {
+    margin: auto;
+    text-align: center;
+    width: 350px;
+    font-size: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    margin-top: 30px;
+}
+
+#keyboardGuide {
+    margin: auto;
+    text-align: center;
+    width: 350px;
+    font-size: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    margin-top: 25px;
+    display: none;
+}
+
+.example-button {
+    width: 2em;
+    /* /* margin-bottom: -50px; */
+    margin-top: 0px; */
 }
