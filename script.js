@@ -6,7 +6,7 @@ let inputValue1 = 0;
 let inputValue2 = 0;
 // the mathematic function (e.g. +-*/)
 let operator = 0;
-// keep track of operator symbol for line1 display
+// the operator symbol for line1 display
 let operatorSymbol = 0;
 // keep track of operator press
 let operatorPressedLast = false;
@@ -148,7 +148,6 @@ const posNegButton = document.getElementById("posNeg");
 posNegButton.addEventListener("click", () => posNeg(input))
 
 // -- OPERATOR BUTTONS -- //
-    
 function operatorUpdate(symbol) {
     // running equals here ensures that "operator chaining" works i.e. user can evaluate the previous expression immediately using operator buttons and not equals button
     // without this, they would always trigger the second operator they pressed (not the previous one)
@@ -237,6 +236,7 @@ function equals(symbol) {
 const equalsButton = document.getElementById("equals");
 equalsButton.addEventListener("click", () => equals());
 
+// -- KEYBOARD SUPPORT -- //
 let firstKeyDown = false;
 const keyboardMessage = document.getElementById("keyboardMessage");
 const keyboardGuide = document.getElementById("keyboardGuide");
@@ -268,6 +268,7 @@ if (e.code == "Digit6" || e.code == "Numpad6") {
 if (e.code == "Digit7" || e.code == "Numpad7") {
     updateDisplay(7);
 }
+// key used for 8 as it is same button as *
 if (e.key == "8" || e.code == "Numpad8") {
     updateDisplay(8);
 }
@@ -277,7 +278,7 @@ if (e.code == "Digit9" || e.code == "Numpad9") {
 if (e.code == "Period" || e.code == "NumpadDecimal") {
     updateDisplay(".");
 }
-// operators
+// operators (key used where more precise or straightforward)
 if (e.key == "+") {
     operatorUpdate("+");
 }
@@ -300,27 +301,16 @@ if (e.key == "Escape") {
 if (e.code == "Backspace" || e.code == "Delete") {
     backSpace(input);
 }
-if (e.code == "Backspace" || e.code == "Delete") {
-    backSpace(input);
-}
 // backtick button for posNeg
 if (e.code == "ArrowUp") {
     posNeg(input);
 }
+// ensures key guide appears after 1 keypress and stays onscreen
 if (firstKeyDown == false) {
     keyboardMessage.style.display = "none";
     keyboardGuide.style.display = "block";
     firstKeyDown = true;
 }
-
 });
 
-
-
-// window.addEventListener("keypress", () => {
-// if (firstKeyDown = false) {
-//     keyboardMessage.style.display = "none";
-//     keyboardGuide.style.display = "block";
-// } 
-// })
 

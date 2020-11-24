@@ -11,10 +11,6 @@
 #logo {
     color: white;
     font-family: "Goldman", cursive;
-    /* width: 100%; */
-    /* text-align: left; */
-    /* margin-left: 20px;
-    margin-right: 60px; */
     margin-right: 120px;
     display: inline-flex;
 }
@@ -22,9 +18,6 @@
 #model {
     font-family: 'Times New Roman', Times, serif;
     color:white;
-    /* text-align: right; */
-    /* margin-right: 20px;
-    margin-left: 55px; */
     display: inline-flex;
 }
 
@@ -51,14 +44,12 @@
     font-size: 3.5em;
     // 3.5em;
     text-align: right;
-    /* border: 5px outset #3A4F6A; */
     box-shadow: 1px 1px 10px black inset;
     border-radius: 5px;
     padding: 5px;
     font-family: arial;
     height: 1.7em;
     width: 5.2em;
-    /* width: 334px; */
     margin-bottom: 20px;
     margin-top: 50px;
     margin: auto;
@@ -78,11 +69,9 @@
 }
 
 #container {
-    /* max-width: 350px; */
     width: 350px;
     text-align: center;
     margin: auto;
-    /* margin-top: 100px; */
     background-color: #3A4F6A;
     border-radius: 10px;
     box-shadow: 1px 1px 10px rgb(32, 31, 31) inset;
@@ -100,7 +89,6 @@
     width: 3em;
     height: 1.5em;
     border-radius: 5px;
-    /* border: solid rgb(112, 112, 112); */
     background-color: #B0ABAF;
     color: white;
     box-shadow: 0px 0px 7px rgb(59, 58, 58) inset;
@@ -159,6 +147,5 @@
 
 .example-button {
     width: 2em;
-    /* /* margin-bottom: -50px; */
     margin-top: 0px; */
 }
